@@ -1,0 +1,3 @@
+SQLAlchemy==1.4.45
+psycopg2-binary==2.9.5
+sqlalchemyseed[yaml]~=1.0.6

@@ -1,0 +1,10 @@
+- model: models.model.Order
+  data:
+    - order_id: 1
+      user_id: 1
+      total_price: 29.98
+      status: 'Pending'
+    - order_id: 2
+      user_id: 2
+      total_price: 24.99
+      status: 'Shipped'

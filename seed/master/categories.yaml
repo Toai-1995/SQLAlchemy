@@ -1,0 +1,8 @@
+- model: models.model.Category
+  data:
+    - category_id: 1
+      name: 'Books'
+    - category_id: 2
+      name: 'Toys'
+    - category_id: 3
+      name: 'Educational'
