@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import ForeignKey, Column, String, Integer, Table, TIMESTAMP, TEXT, DECIMAL, DateTime
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 Base = declarative_base()
 
@@ -27,7 +27,7 @@ class User(Base):
 
     orders = relationship('Order', back_populates='user', uselist=True)
     reviews = relationship('Review', back_populates='user', uselist=True)
-    books = relationship('Book', secondary=user_book_association, back_populates='users', uselist=True)
+    books = relationship('Book', secondary=user_book_association, back_populates='users')
     toys = relationship('Toy', secondary=user_toy_association, back_populates='users', uselist=True)
 
 
@@ -52,7 +52,7 @@ class Book(Base):
 
     category = relationship('Category', back_populates='books', cascade='all, delete')
     reviews = relationship('Review', back_populates='book', uselist=True)
-    users = relationship('User', secondary=user_book_association, back_populates='books', uselist=True)
+    users = relationship('User', secondary=user_book_association, back_populates='books')
 
 
 class Toy(Base):
@@ -78,19 +78,19 @@ class Order(Base):
     status = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
-    user = relationship('User', back_populates='orders')
-    order_items = relationship('OrderItem', back_populates='order', uselist=True, cascade='delete-orphan')
+    user = relationship('User')
+    order_items = relationship('OrderItem', back_populates='order')
 
 
 class OrderItem(Base):
     __tablename__ = 'order_items'
     order_item_id = Column(Integer, primary_key=True)
     order_id = Column(Integer, ForeignKey('orders.order_id'))
-    product_id = Column(Integer, nullable=False)  # Can be book_id or toy_id
+    product_id = Column(Integer, nullable=False)
     quantity = Column(Integer, nullable=False)
     price = Column(DECIMAL, nullable=False)
 
-    order = relationship('Order', back_populates='order_items')
+    order = relationship('Order')
 
 
 class Review(Base):

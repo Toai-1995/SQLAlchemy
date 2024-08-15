@@ -67,11 +67,6 @@ for index, user in enumerate(users):
     for _ in range(random.randint(1, 5)):
         book = random.choice(books)
         user.books.append(book)
-        user_books_data = {
-            'user_id': user.user_id,
-            'book_id': book.book_id,
-        }
-        session.execute(user_book_association.insert().values(user_books_data))
     if index % 1000 == 0:
         session.commit()
 

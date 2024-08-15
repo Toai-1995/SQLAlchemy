@@ -1,21 +1,36 @@
 from sqlalchemy.orm import lazyload, subqueryload, selectinload, raiseload, joinedload
 
-from models.model import Order, OrderItem, Book
-from seed import session
+from models.model import *
+from Session import session
 
-order1 = session.query(Order).filter_by(order_id=1).first()
+# # lazy loading
+#
+# users = session.query(User).all()
+# for user in users:
+#     print(user.username)
+#     for book in user.books:
+#         print(f"- {book.title}")
+#
+#
+# # # eager loading
+# users = session.query(User).options(joinedload(User.books)).all()
+# for user in users:
+#     print(user.username)
+#     for book in user.books:
+#         print(f"- {book.title}")
+#
+# # # subquery loading
+# users = session.query(User).options(subqueryload(User.books)).all()
+# for user in users:
+#     print(user.username)
+#     for book in user.books:
+#         print(f"- {book.title}")
 
-# books = session.query(Book).options(selectinload(Book.users)).all()
+# # selectin loading
+users = session.query(User).options(selectinload(User.books)).all()
+for user in users:
+    print(user.username)
+    for book in user.books:
+        print(f"- {book.title}")
 
-print('Long dep trai')
 
-# print(books[0].users)
-# print(order1.order_items)
-
-order_item1 = session.query(OrderItem).filter_by(order_item_id=1).first()
-
-# session.delete(order1)
-# session.commit()
-
-order1.order_items.remove(order_item1)
-session.commit()

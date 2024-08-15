@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-.PHONY: seed
+# .PHONY: seed
 
 seed:
-	python3 seed.py
+	python seed.py
