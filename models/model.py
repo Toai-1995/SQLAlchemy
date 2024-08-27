@@ -27,7 +27,7 @@ class User(Base):
 
     orders = relationship('Order', back_populates='user', uselist=True)
     reviews = relationship('Review', back_populates='user', uselist=True)
-    books = relationship('Book', secondary=user_book_association, back_populates='users')
+    books = relationship('Book', secondary=user_book_association)
     toys = relationship('Toy', secondary=user_toy_association, back_populates='users', uselist=True)
 
 
@@ -52,7 +52,7 @@ class Book(Base):
 
     category = relationship('Category', back_populates='books', cascade='all, delete')
     reviews = relationship('Review', back_populates='book', uselist=True)
-    users = relationship('User', secondary=user_book_association, back_populates='books')
+    # users = relationship('User', secondary=user_book_association, back_populates='books')
 
 
 class Toy(Base):
@@ -79,7 +79,7 @@ class Order(Base):
     created_at = Column(DateTime, default=datetime.now)
 
     user = relationship('User')
-    order_items = relationship('OrderItem', back_populates='order')
+    order_items = relationship('OrderItem')
 
 
 class OrderItem(Base):
@@ -90,7 +90,7 @@ class OrderItem(Base):
     quantity = Column(Integer, nullable=False)
     price = Column(DECIMAL, nullable=False)
 
-    order = relationship('Order')
+    order = relationship('Order', back_populates='order_items')
 
 
 class Review(Base):

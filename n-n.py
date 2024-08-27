@@ -3,10 +3,10 @@ from Session import session
 
 #
 # # set up the relationship between user and book n-n
-# user = session.query(User).filter(User.user_id == 1).first()
-# book = session.query(Book).filter(Book.book_id == 1).first()
-# print("user", user.books)
-# print("book", book.users)
+user = session.query(User).filter(User.user_id == 1).first()
+book = session.query(Book).filter(Book.book_id == 1).first()
+print("user", user.books)
+print("book", book.users)
 #
 #
 # # add relationship between user record and book record
@@ -35,8 +35,10 @@ from Session import session
 
 # delete relationship between user record and book record
 user5 = session.query(User).filter(User.user_id == 5).first()
-print("user5", user5.books)
-user5.books.pop(0)
+session.delete(user5)
+# print("user5", user5.books)
+# user5.books.pop(0)
+
 
 session.commit()
 

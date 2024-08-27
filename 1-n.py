@@ -36,7 +36,7 @@ order.status = 'Shipped'
 
 
 print('toai', order_item_2.order.status)
-print('long', order.order_items)
+# print('long', order.order_items)
 
 session.commit()
 
