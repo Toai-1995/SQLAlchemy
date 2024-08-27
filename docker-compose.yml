@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./:/opt/project
     working_dir: /opt/project
